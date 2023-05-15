@@ -25,4 +25,9 @@ public class GameService {
         return new GameDTO(gameRepository.findById(id).get());
         // Tratamento de exceções será implementado futuramente
     }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> findByList(Long listId) {
+        return gameRepository.searchByList(listId).stream().map(GameMinDTO::new).toList();
+    }
 }
